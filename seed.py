@@ -1,5 +1,6 @@
 from datetime import date, datetime, timedelta
 from random import randint, choice
+
 import faker
 from sqlalchemy import select
 
@@ -20,17 +21,17 @@ def date_range(start: date, end: date) -> list:
 def fill_data():
    
     disciplines = [
-        "Вища математика",
-        "Хімія",
-        "Економіка підприємства",
-        "Обчислювальна математика",
-        "Історія України",
-        "Теоретична механіка",
-        "Менеджмент організацій",
-        "Системне програмування",
+        'Вища математика',
+        'Хімія',
+        'Економіка підприємства',
+        'Обчислювальна математика',
+        'Історія України',
+        'Теоретична механіка',
+        'Менеджмент організацій',
+        'Системне програмування',
     ]
 
-    groups = ["A", "B", "C"]
+    groups = ['A', 'B', 'C']
 
     fake = faker.Faker('uk-UA')
     number_of_teachers = 5
@@ -61,9 +62,9 @@ def fill_data():
         session.commit()
 
     def seed_grades():
-        start_date = datetime.strptime("2020-09-01", "%Y-%m-%d")
+        start_date = datetime.strptime('2020-09-01', '%Y-%m-%d')
 
-        end_date = datetime.strptime("2021-05-25", "%Y-%m-%d")
+        end_date = datetime.strptime('2021-05-25', '%Y-%m-%d')
 
         d_range = date_range(start=start_date, end=end_date)
         discipline_ids = session.scalars(select(Discipline.id)).all()
@@ -92,5 +93,5 @@ def fill_data():
     seed_grades()
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     fill_data()

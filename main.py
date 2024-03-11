@@ -1,9 +1,11 @@
 import argparse
 from datetime import datetime
+
 from pprint import pprint
 
 from src.models import Teacher, Student, Discipline, Grade, Group
 from src.db import session
+
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-a', '--action', dest='action', help='Action: create/list/update/remove')
@@ -40,7 +42,7 @@ def create(model: str, name: str, grade=None, group_id=None, teacher_id=None, st
             session.add(discipline)
 
         case 'Grade':
-            grade_ = Grade(grade=grade, date_of=datetime.strftime(datetime.now().date(), "%Y-%m-%d"), student_id=student_id, discipline_id=discipline_id)
+            grade_ = Grade(grade=grade, date_of=datetime.strftime(datetime.now().date(), '%Y-%m-%d'), student_id=student_id, discipline_id=discipline_id)
             session.add(grade_)
 
     session.commit()
@@ -76,25 +78,25 @@ def update(model: str, id:int, name:str):
         case 'Teacher':
             new_info = session.query(Teacher).filter(Teacher.id == id)
             if new_info:
-                new_info.update({"fullname": name})
+                new_info.update({'fullname': name})
                 session.commit()
 
         case 'Student':
             new_info = session.query(Student).filter(Student.id == id)
             if new_info:
-                new_info.update({"fullname": name})
+                new_info.update({'fullname': name})
                 session.commit()
 
         case 'Group':
             new_info = session.query(Group).filter(Group.id == id)
             if new_info:
-                new_info.update({"name": name})
+                new_info.update({'name': name})
                 session.commit()
 
         case 'Discipline':
             new_info = session.query(Discipline).filter(Discipline.id == id)
             if new_info:
-                new_info.update({"name": name})
+                new_info.update({'name': name})
                 session.commit()
 
     return 'The operation was completed successfully'
